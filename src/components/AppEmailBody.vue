@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2>{{email}}</h2>
+    <h2 v-if="$route.params.mailId">{{email.theme}}</h2>
+    <h2 v-else>Выберите запись</h2>
 
     <button class="btn">Закрыть</button>
   </div>
@@ -9,11 +10,21 @@
 <script>
 export default {
 
+  data() {
+    return {
+
+    }
+  },
   inject: ['emails'],
-  props: ['mailId'],
+  props: {
+    mailId: Number
+  },
+
+
+
   computed: {
     email() {
-      return this.emails.find(e => e.id === this.mailId);
+      return this.emails.find(e => e.id === this.mailId)
     }
   }
 
